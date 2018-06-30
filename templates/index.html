@@ -1,36 +1,58 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <body>
 
-<h1>Cookie Clicker!</h1>
+    <h1>Cookie Clicker!</h1>
 
-<button onclick="myFunction()">Bake</button>
+    <button id="Baker" onclick="myFunction()">Bake</button>
 
-<button onclick="myFunction2()">Increase cookies per click</button>
+    <button id="addAdd" onclick="myFunction2()">Increase cookies per click</button>
 
-<p id="demo"></p>
+    <p id="demo"></p>
 
-<p id="demo2"></p>
+    <p id="demo2"></p>
 
-<script>
+    <p id="demo3"></p>
+
+    <script>
 var cookies = 1;
 var cookiesPerClick = 1;
 var cost = 2;
+
+document.getElementById("Baker").style.background='#ffa500';
+
 function myFunction() {
-	document.getElementById("demo").innerHTML = "You have " + cookies + " cookies!";
-	document.getElementById("demo2").innerHTML = "You need " + cost + " cookies untill you can upgrade cookies per click!";
-	cookies = cookies + cookiesPerClick;
+  cookies = cookies + cookiesPerClick;
+  document.getElementById("demo").innerHTML = "You have " + cookies + " cookies!";
+  document.getElementById("demo2").innerHTML = "You need " + cost + " cookies untill you can upgrade cookies per click!";
+  document.getElementById("demo3").innerHTML = "You get " + cookiesPerClick + " cookies per click!"
+    if (cookies >= cost){
+      document.getElementById("addAdd").style.background='#00ff00';
+    }
+    else{
+      document.getElementById("addAdd").style.background='#ff0000';
+    }
 }
 function myFunction2() {
-	if (cookies >= cost) {
-		cookiesPerClick = cookiesPerClick + 1;
-		cost = cost * 2;
-		cookies = cookies - cost;
-		document.getElementById("demo2").innerHTML = "You need " + cost + " cookies untill you can upgrade cookies per click!";
-		document.getElementById("demo").innerHTML = "You have " + cookies + " cookies!";
-	}
-}
-</script>
+  if (cookies >= cost) {
+    cookiesPerClick = cookiesPerClick + 2;
+    cookies = cookies - cost;
+    cost = cost * 2;
+    document.getElementById("demo2").innerHTML = "You need " + cost + " cookies untill you can upgrade cookies per click!";
+    document.getElementById("demo").innerHTML = "You have " + cookies + " cookies!";
+    document.getElementById("demo3").innerHTML = "You get " + cookiesPerClick + " cookies per click!"
 
-</body>
+      if (cookies >= cost){
+        document.getElementById("addAdd").style.background='#00ff00';
+      }
+      else{
+        document.getElementById("addAdd").style.background='#ff0000';
+      }
+
+
+  }
+}
+    </script>
+
+  </body>
 </html>
