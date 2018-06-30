@@ -10,15 +10,25 @@
 
 <p id="demo"></p>
 
+<p id="demo2"></p>
+
 <script>
-var cookies = 1
-var cookiesPerClick = 1
+var cookies = 1;
+var cookiesPerClick = 1;
+var cost = 2;
 function myFunction() {
-  document.getElementById("demo").innerHTML = "You have " + cookies + " cookies!";
-cookies = cookies + cookiesPerClick;
+	document.getElementById("demo").innerHTML = "You have " + cookies + " cookies!";
+	document.getElementById("demo2").innerHTML = "You need " + cost + " cookies untill you can upgrade cookies per click!";
+	cookies = cookies + cookiesPerClick;
 }
 function myFunction2() {
-cookiesPerClick = cookiesPerClick + 1;
+	if (cookies >= cost) {
+		cookiesPerClick = cookiesPerClick + 1;
+		cost = cost * 2;
+		cookies = cookies - cost;
+		document.getElementById("demo2").innerHTML = "You need " + cost + " cookies untill you can upgrade cookies per click!";
+		document.getElementById("demo").innerHTML = "You have " + cookies + " cookies!";
+	}
 }
 </script>
 
