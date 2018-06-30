@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Cookie Clicker!</h1>
+
+<button onclick="myFunction()">Bake</button>
+
+<button onclick="myFunction2()">Increase cookies per click</button>
+
+<p id="demo"></p>
+
+<script>
+var cookies = 1
+var cookiesPerClick = 1
+function myFunction() {
+  document.getElementById("demo").innerHTML = "You have " + cookies + " cookies!";
+cookies = cookies + cookiesPerClick;
+}
+function myFunction2() {
+cookiesPerClick = cookiesPerClick + 1;
+}
+</script>
+
+</body>
+</html>
