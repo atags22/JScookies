@@ -1,7 +1,18 @@
-Example 2
+Cookie Clicker!
 =========
 
-This example shows how a Flask application can work with templates.
+This is a learning exercise for Flask and Javascript.
+
+Getting Started
+-----------------------
+These commmands install the requirements:
+```
+$ virtualenv venv
+$ . /venv/bin/activate
+(venv) pip install -r requirements.txt
+```
+
+Python 3.4 users should replace `virtualenv` with `pyvenv`.
 
 Running the application
 -----------------------
