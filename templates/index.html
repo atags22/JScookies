@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <body>
 
-<h1>Cookie Clicker!</h1>
+    <h1 color= red>Cookie Clicker!</h1>
 
-<button id="Baker" onclick="addCookies()">Bake</button>
+    <button id="Baker" onclick="addCookies()">Bake</button>
 
-<button id="addAdd" onclick="moreCookiesPerClick()">Increase cookies per click</button>
+    <button id="addAdd" onclick="moreCookiesPerClick()">Increase cookies per click</button>
 
-<button id="BuyGrandma" onclick="addGrandma()">Buy a Grandma!</button>
+    <button id="BuyGrandma" onclick="addGrandma()">Buy a Grandma!</button>
 
-<p id="numberOfCookies"></p>
+    <p id="numberOfCookies"></p>
 
-<p id="cookiesYouNeed"></p>
+    <p id="cookiesYouNeedToPay"></p>
 
-<p id="howManyYouGet"></p>
+    <p id="cookiesYouNeedToGet"></p>
 
-<p id="costOfGrandma"></p>
+    <p id="howManyYouGet"></p>
 
-<p id="cookiesPerGrandma"></p>
+    <p id="costOfGrandma"></p>
 
-<p id="numberOfGrandmas"></p>
+    <p id="cookiesPerGrandma"></p>
 
-<script>
+    <p id="numberOfGrandmas"></p>
+
+    <script>
 
 
 //TODO: make it so that every so often you can find more or less cookies per click. Also you can find treasure chests.
@@ -38,29 +40,29 @@ var currentFibonacci;
 var isGrandmaRunning = 0;
 var numGrandma = 0;
 var grandmaCost = 1000;
-var buttons = document.getElementById("Baker");
-    buttons.innerHTML = '<img src="images\cookie.png" />';
+var cookiesUntilUpgrade;
+
 
 document.getElementById("Baker").style.background='#ffa500';
 document.getElementById("addAdd").style.background='#ff0000';
 document.getElementById("BuyGrandma").style.background='#ff0000';
 
 function getNextFibonacci() {
-	currentFibonacci = fibonacci1 + fibonacci2
-		fibonacci2 = fibonacci1
-		fibonacci1 = currentFibonacci
-		return currentFibonacci
+  currentFibonacci = fibonacci1 + fibonacci2
+    fibonacci2 = fibonacci1
+    fibonacci1 = currentFibonacci
+    return currentFibonacci
 
 }
 
 function getFibonacciByNumber(num) {
-	if(num == 1){
-		return 0;
-	}
-	if(num == 2){
-		return 1;
-	}
-	return getFibonacciByNumber(num-1) + getFibonacciByNumber(num-2);
+  if(num == 1){
+    return 0;
+  }
+  if(num == 2){
+    return 1;
+  }
+  return getFibonacciByNumber(num-1) + getFibonacciByNumber(num-2);
 
 }
 
@@ -68,78 +70,88 @@ function getFibonacciByNumber(num) {
 
 function updateDisplay() {
 
-	document.getElementById("numberOfCookies").innerHTML = "You have " + cookies + " cookies!";
-	document.getElementById("cookiesPerGrandma").innerHTML = "You have " + numGrandma + " Grandmas!"
-	document.getElementById("cookiesYouNeed").innerHTML = "You need " + cost + " cookies untill you can upgrade cookies per click!";
-	document.getElementById("costOfGrandma").innerHTML = "You need to pay " + grandmaCost + " cookies for a grandma!"
-	document.getElementById("howManyYouGet").innerHTML = "You get " + cookiesPerClick + " cookies per click!"
+  document.getElementById("numberOfCookies").innerHTML = "You have " + cookies + " cookies!";
+  document.getElementById("cookiesPerGrandma").innerHTML = "You have " + numGrandma + " Grandmas!"
+  document.getElementById("cookiesYouNeedToPay").innerHTML = "You need to pay " + cost + " cookies to upgrade cookies per click!";
+  document.getElementById("costOfGrandma").innerHTML = "You need to pay " + grandmaCost + " cookies for a grandma!"
+  document.getElementById("howManyYouGet").innerHTML = "You get " + cookiesPerClick + " cookies per click!"
 
-		if (cookies >= cost){
-			document.getElementById("addAdd").style.background='#00ff00';
-		}
-		else{
-			document.getElementById("addAdd").style.background='#ff0000';
-		}
+    if (cookies >= cost){
+      document.getElementById("addAdd").style.background='#00ff00';
+    }
+    else{
+      document.getElementById("addAdd").style.background='#ff0000';
+    }
 
 
 
-	if (cookies >= grandmaCost){
-		document.getElementById("BuyGrandma").style.background='#00ff00';
-	}
-	else{
-		document.getElementById("BuyGrandma").style.background='#ff0000';
-	}
+  if (cookies >= grandmaCost){
+    document.getElementById("BuyGrandma").style.background='#00ff00';
+  }
+  else{
+    document.getElementById("BuyGrandma").style.background='#ff0000';
+  }
 
+
+  if (cost > cookies) {
+    cookiesUntilUpgrade = cost - cookies;
+    document.getElementById("cookiesYouNeedToGet").innerHTML = "You need to get " + cookiesUntilUpgrade + " cookies until you can upgrade!"
+  }
+  else {
+
+    document.getElementById("cookiesYouNeedToGet").innerHTML = "You can upgrade now because you have enough cookies!"
+
+  }
 
 }
 
 function runGrandma() {
-	setTimeout(function(){
-			cookies = cookies + (numGrandma * 500);
-			runGrandma();
-			updateDisplay();
-			}, 5000);
+  setTimeout(function(){
+    cookies = cookies + (numGrandma * 500);
+    runGrandma();
+    updateDisplay();
+  }, 5000);
 
 
 }
 
 function addGrandma() {
 
-	if (cookies >= grandmaCost) {
-		if(isGrandmaRunning == 1){
-			//Increase something or other
-			numGrandma = numGrandma + 1
-			cookies = cookies - grandmaCost;
-			grandmaCost = 10000*getFibonacciByNumber(numGrandma);
-		}
-		else{
-			runGrandma();
-			isGrandmaRunning = 1
-		}
-		updateDisplay();
+  if (cookies >= grandmaCost) {
+    if(isGrandmaRunning == 1){
+      //Increase something or other
+      numGrandma = numGrandma + 1
+        cookies = cookies - grandmaCost;
+      grandmaCost = 10000*getFibonacciByNumber(numGrandma);
+    }
+    else{
+      runGrandma();
+      isGrandmaRunning = 1
+    }
+    updateDisplay();
 
-	}
+  }
 
 
 }
 
 
 function addCookies() {
-	cookies = cookies + cookiesPerClick;
-	updateDisplay();
+  cookies = cookies + cookiesPerClick;
+  updateDisplay();
 }
 function moreCookiesPerClick() {
-	if (cookies >= cost) {
-		cookiesPerClick = cookiesPerClick + add;
+  if (cookies >= cost) {
+    cookiesPerClick = cookiesPerClick + add;
 
-		cookies = cookies - cost;
-		add = add + 2
-			cost = getNextFibonacci();
-		updateDisplay();   
+    cookies = cookies - cost;
+    add = add + 2
+      cost = getNextFibonacci();
+    updateDisplay();
 
-	}
+  }
 }
-</script>
+    </script>
 
-</body>
+  </body>
 </html>
